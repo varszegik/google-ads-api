@@ -42,9 +42,14 @@
     "typescript": "^2.9.2"
   },
   "dependencies": {
+    "@grpc/proto-loader": "^0.3.0",
     "@types/lodash": "^4.14.112",
     "@types/request": "^2.47.1",
     "bluebird": "^3.5.2",
-    "bluebird-retry": "^0.11.0"
+    "bluebird-retry": "^0.11.0",
+    "google-auth-library": "^2.0.0",
+    "googleapis": "^33.0.0",
+    "grpc": "^1.14.2",
+    "protobufjs": "^6.8.8"
   }
 }

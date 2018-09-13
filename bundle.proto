@@ -1,0 +1,1385 @@
+syntax = "proto3";
+
+package google;
+
+message protobuf {
+
+    message DoubleValue {
+
+        double value = 1;
+    }
+
+    message FloatValue {
+
+        float value = 1;
+    }
+
+    message Int64Value {
+
+        int64 value = 1;
+    }
+
+    message UInt64Value {
+
+        uint64 value = 1;
+    }
+
+    message Int32Value {
+
+        int32 value = 1;
+    }
+
+    message UInt32Value {
+
+        uint32 value = 1;
+    }
+
+    message BoolValue {
+
+        bool value = 1;
+    }
+
+    message StringValue {
+
+        string value = 1;
+    }
+
+    message BytesValue {
+
+        bytes value = 1;
+    }
+
+    message FileDescriptorSet {
+
+        repeated FileDescriptorProto file = 1;
+    }
+
+    message FileDescriptorProto {
+
+        string name = 1;
+        string package = 2;
+        repeated string dependency = 3;
+        repeated int32 public_dependency = 10 [packed=false];
+        repeated int32 weak_dependency = 11 [packed=false];
+        repeated DescriptorProto message_type = 4;
+        repeated EnumDescriptorProto enum_type = 5;
+        repeated ServiceDescriptorProto service = 6;
+        repeated FieldDescriptorProto extension = 7;
+        FileOptions options = 8;
+        SourceCodeInfo source_code_info = 9;
+        string syntax = 12;
+    }
+
+    message DescriptorProto {
+
+        string name = 1;
+        repeated FieldDescriptorProto field = 2;
+        repeated FieldDescriptorProto extension = 6;
+        repeated DescriptorProto nested_type = 3;
+        repeated EnumDescriptorProto enum_type = 4;
+        repeated ExtensionRange extension_range = 5;
+        repeated OneofDescriptorProto oneof_decl = 8;
+        MessageOptions options = 7;
+        repeated ReservedRange reserved_range = 9;
+        repeated string reserved_name = 10;
+
+        message ExtensionRange {
+
+            int32 start = 1;
+            int32 end = 2;
+        }
+
+        message ReservedRange {
+
+            int32 start = 1;
+            int32 end = 2;
+        }
+    }
+
+    message FieldDescriptorProto {
+
+        string name = 1;
+        int32 number = 3;
+        Label label = 4;
+        Type type = 5;
+        string type_name = 6;
+        string extendee = 2;
+        string default_value = 7;
+        int32 oneof_index = 9;
+        string json_name = 10;
+        FieldOptions options = 8;
+
+        enum Type {
+
+            TYPE_DOUBLE = 1;
+            TYPE_FLOAT = 2;
+            TYPE_INT64 = 3;
+            TYPE_UINT64 = 4;
+            TYPE_INT32 = 5;
+            TYPE_FIXED64 = 6;
+            TYPE_FIXED32 = 7;
+            TYPE_BOOL = 8;
+            TYPE_STRING = 9;
+            TYPE_GROUP = 10;
+            TYPE_MESSAGE = 11;
+            TYPE_BYTES = 12;
+            TYPE_UINT32 = 13;
+            TYPE_ENUM = 14;
+            TYPE_SFIXED32 = 15;
+            TYPE_SFIXED64 = 16;
+            TYPE_SINT32 = 17;
+            TYPE_SINT64 = 18;
+        }
+
+        enum Label {
+
+            LABEL_OPTIONAL = 1;
+            LABEL_REQUIRED = 2;
+            LABEL_REPEATED = 3;
+        }
+    }
+
+    message OneofDescriptorProto {
+
+        string name = 1;
+        OneofOptions options = 2;
+    }
+
+    message EnumDescriptorProto {
+
+        string name = 1;
+        repeated EnumValueDescriptorProto value = 2;
+        EnumOptions options = 3;
+    }
+
+    message EnumValueDescriptorProto {
+
+        string name = 1;
+        int32 number = 2;
+        EnumValueOptions options = 3;
+    }
+
+    message ServiceDescriptorProto {
+
+        string name = 1;
+        repeated MethodDescriptorProto method = 2;
+        ServiceOptions options = 3;
+    }
+
+    message MethodDescriptorProto {
+
+        string name = 1;
+        string input_type = 2;
+        string output_type = 3;
+        MethodOptions options = 4;
+        bool client_streaming = 5;
+        bool server_streaming = 6;
+    }
+
+    message FileOptions {
+
+        string java_package = 1;
+        string java_outer_classname = 8;
+        bool java_multiple_files = 10;
+        bool java_generate_equals_and_hash = 20 [deprecated=true];
+        bool java_string_check_utf8 = 27;
+        OptimizeMode optimize_for = 9;
+        string go_package = 11;
+        bool cc_generic_services = 16;
+        bool java_generic_services = 17;
+        bool py_generic_services = 18;
+        bool deprecated = 23;
+        bool cc_enable_arenas = 31;
+        string objc_class_prefix = 36;
+        string csharp_namespace = 37;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        enum OptimizeMode {
+
+            SPEED = 1;
+            CODE_SIZE = 2;
+            LITE_RUNTIME = 3;
+        }
+
+        extensions 1000 to max;
+
+        reserved 38;
+    }
+
+    message MessageOptions {
+
+        bool message_set_wire_format = 1;
+        bool no_standard_descriptor_accessor = 2;
+        bool deprecated = 3;
+        bool map_entry = 7;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+
+        reserved 8;
+    }
+
+    message FieldOptions {
+
+        CType ctype = 1;
+        bool packed = 2;
+        JSType jstype = 6;
+        bool lazy = 5;
+        bool deprecated = 3;
+        bool weak = 10;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        enum CType {
+
+            STRING = 0;
+            CORD = 1;
+            STRING_PIECE = 2;
+        }
+
+        enum JSType {
+
+            JS_NORMAL = 0;
+            JS_STRING = 1;
+            JS_NUMBER = 2;
+        }
+
+        extensions 1000 to max;
+
+        reserved 4;
+    }
+
+    message OneofOptions {
+
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+    }
+
+    message EnumOptions {
+
+        bool allow_alias = 2;
+        bool deprecated = 3;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+    }
+
+    message EnumValueOptions {
+
+        bool deprecated = 1;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+    }
+
+    message ServiceOptions {
+
+        bool deprecated = 33;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+    }
+
+    message MethodOptions {
+
+        bool deprecated = 33;
+        repeated UninterpretedOption uninterpreted_option = 999;
+
+        extensions 1000 to max;
+    }
+
+    message UninterpretedOption {
+
+        repeated NamePart name = 2;
+        string identifier_value = 3;
+        uint64 positive_int_value = 4;
+        int64 negative_int_value = 5;
+        double double_value = 6;
+        bytes string_value = 7;
+        string aggregate_value = 8;
+
+        message NamePart {
+
+            string name_part = 1;
+            bool is_extension = 2;
+        }
+    }
+
+    message SourceCodeInfo {
+
+        repeated Location location = 1;
+
+        message Location {
+
+            repeated int32 path = 1;
+            repeated int32 span = 2;
+            string leading_comments = 3;
+            string trailing_comments = 4;
+            repeated string leading_detached_comments = 6;
+        }
+    }
+
+    message GeneratedCodeInfo {
+
+        repeated Annotation annotation = 1;
+
+        message Annotation {
+
+            repeated int32 path = 1;
+            string source_file = 2;
+            int32 begin = 3;
+            int32 end = 4;
+        }
+    }
+
+    message FieldMask {
+
+        repeated string paths = 1;
+    }
+}
+
+message ads {
+
+    message googleads {
+
+        message v0 {
+
+            message services {
+
+                option java_package = "com.google.ads.googleads.v0.services";
+                option java_outer_classname = "GoogleAdsServiceProto";
+                option java_multiple_files = true;
+                option objc_class_prefix = "GAA";
+                option csharp_namespace = "Google.Ads.GoogleAds.V0.Services";
+                option php_namespace = "Google\\Ads\\GoogleAds\\V0\\Services";
+                option php_metadata_namespace = "Google\\Ads\\GoogleAds\\V0\\Services";
+                service GoogleAdsService {
+                    rpc Search (SearchGoogleAdsRequest) returns (SearchGoogleAdsResponse);
+                }
+
+                message SearchGoogleAdsRequest {
+
+                    string customer_id = 1;
+                    string query = 2;
+                    string page_token = 3;
+                    int32 page_size = 4;
+                }
+
+                message SearchGoogleAdsResponse {
+
+                    repeated GoogleAdsRow results = 1;
+                    string next_page_token = 2;
+                    int64 total_results_count = 3;
+                    google.protobuf.FieldMask field_mask = 5;
+                }
+
+                message GoogleAdsRow {
+
+                    resources.AdGroup ad_group = 3;
+                    resources.AdGroupAd ad_group_ad = 16;
+                    resources.AdGroupBidModifier ad_group_bid_modifier = 24;
+                    resources.AdGroupCriterion ad_group_criterion = 17;
+                    resources.BiddingStrategy bidding_strategy = 18;
+                    resources.CampaignBudget campaign_budget = 19;
+                    resources.Campaign campaign = 2;
+                    resources.CampaignCriterion campaign_criterion = 20;
+                    resources.Customer customer = 1;
+                    resources.GeoTargetConstant geo_target_constant = 23;
+                    resources.KeywordView keyword_view = 21;
+                    resources.Recommendation recommendation = 22;
+                    common.Metrics metrics = 4;
+                    enums.AdNetworkTypeEnum.AdNetworkType ad_network_type = 5;
+                    google.protobuf.StringValue date = 6;
+                    enums.DayOfWeekEnum.DayOfWeek day_of_week = 7;
+                    enums.DeviceEnum.Device device = 8;
+                    google.protobuf.Int32Value hour = 9;
+                    google.protobuf.StringValue month = 10;
+                    google.protobuf.StringValue quarter = 12;
+                    enums.SlotEnum.Slot slot = 13;
+                    google.protobuf.StringValue week = 14;
+                    google.protobuf.Int32Value year = 15;
+                }
+            }
+
+            message common {
+
+                option java_package = "com.google.ads.googleads.v0.common";
+                option java_outer_classname = "BiddingProto";
+                option java_multiple_files = true;
+                option objc_class_prefix = "GAA";
+                option csharp_namespace = "Google.Ads.GoogleAds.V0.Common";
+                option php_namespace = "Google\\Ads\\GoogleAds\\V0\\Common";
+                option php_metadata_namespace = "Google\\Ads\\GoogleAds\\V0\\Common";
+
+                message Metrics {
+
+                    google.protobuf.DoubleValue all_conversion_rate = 5;
+                    google.protobuf.DoubleValue all_conversion_value = 6;
+                    google.protobuf.DoubleValue all_conversions = 7;
+                    google.protobuf.DoubleValue all_conversions_value_per_cost = 62;
+                    google.protobuf.DoubleValue all_conversions_value_per_interaction = 61;
+                    google.protobuf.DoubleValue average_cost = 8;
+                    google.protobuf.DoubleValue average_cpc = 9;
+                    google.protobuf.DoubleValue average_cpm = 10;
+                    google.protobuf.DoubleValue average_position = 13;
+                    google.protobuf.DoubleValue bounce_rate = 15;
+                    google.protobuf.Int64Value clicks = 19;
+                    google.protobuf.DoubleValue content_budget_lost_impression_share = 20;
+                    google.protobuf.DoubleValue content_impression_share = 21;
+                    google.protobuf.DoubleValue content_rank_lost_impression_share = 22;
+                    google.protobuf.DoubleValue conversion_rate = 23;
+                    google.protobuf.DoubleValue conversion_value = 24;
+                    google.protobuf.DoubleValue conversion_value_per_cost = 64;
+                    google.protobuf.DoubleValue conversion_value_per_interaction = 63;
+                    google.protobuf.DoubleValue conversions = 25;
+                    google.protobuf.Int64Value cost_micros = 26;
+                    google.protobuf.DoubleValue cost_per_all_conversion = 27;
+                    google.protobuf.DoubleValue cost_per_conversion = 28;
+                    google.protobuf.DoubleValue cross_device_conversions = 29;
+                    google.protobuf.DoubleValue ctr = 30;
+                    google.protobuf.DoubleValue engagement_rate = 31;
+                    google.protobuf.Int64Value engagements = 32;
+                    google.protobuf.Int64Value impressions = 37;
+                    google.protobuf.DoubleValue interaction_rate = 38;
+                    google.protobuf.Int64Value interactions = 39;
+                    google.protobuf.DoubleValue invalid_click_rate = 40;
+                    google.protobuf.Int64Value invalid_clicks = 41;
+                    google.protobuf.DoubleValue percent_new_visitors = 42;
+                    google.protobuf.Int64Value phone_calls = 43;
+                    google.protobuf.Int64Value phone_impressions = 44;
+                    google.protobuf.DoubleValue phone_through_rate = 45;
+                    google.protobuf.DoubleValue relative_ctr = 46;
+                    google.protobuf.DoubleValue search_budget_lost_impression_share = 47;
+                    google.protobuf.DoubleValue search_exact_match_impression_share = 49;
+                    google.protobuf.DoubleValue search_impression_share = 50;
+                    google.protobuf.DoubleValue search_rank_lost_impression_share = 51;
+                    google.protobuf.DoubleValue value_per_all_conversions = 52;
+                    google.protobuf.DoubleValue value_per_conversion = 53;
+                    google.protobuf.Int64Value view_through_conversions = 60;
+                }
+
+                message CustomParameter {
+
+                    google.protobuf.StringValue key = 1;
+                    google.protobuf.StringValue value = 2;
+                }
+
+                message Ad {
+
+                    oneof ad_data {
+
+                        TextAdInfo text_ad = 6;
+                        ExpandedTextAdInfo expanded_text_ad = 7;
+                        DynamicSearchAdInfo dynamic_search_ad = 8;
+                        ResponsiveDisplayAdInfo responsive_display_ad = 9;
+                        CallOnlyAdInfo call_only_ad = 13;
+                        ExpandedDynamicSearchAdInfo expanded_dynamic_search_ad = 14;
+                        HotelAdInfo hotel_ad = 15;
+                    }
+
+                    google.protobuf.Int64Value id = 1;
+                    repeated google.protobuf.StringValue final_urls = 2;
+                    repeated google.protobuf.StringValue final_mobile_urls = 16;
+                    google.protobuf.StringValue tracking_url_template = 12;
+                    repeated CustomParameter url_custom_parameters = 10;
+                    google.protobuf.StringValue display_url = 4;
+                    enums.AdTypeEnum.AdType type = 5;
+                }
+
+                message TextAdInfo {
+
+                    google.protobuf.StringValue headline = 1;
+                    google.protobuf.StringValue description1 = 2;
+                    google.protobuf.StringValue description2 = 3;
+                }
+
+                message ExpandedTextAdInfo {
+
+                    google.protobuf.StringValue headline_part1 = 1;
+                    google.protobuf.StringValue headline_part2 = 2;
+                    google.protobuf.StringValue description = 3;
+                    google.protobuf.StringValue path1 = 4;
+                    google.protobuf.StringValue path2 = 5;
+                }
+
+                message DynamicSearchAdInfo {
+
+                    google.protobuf.StringValue description1 = 1;
+                    google.protobuf.StringValue description2 = 2;
+                }
+
+                message ResponsiveDisplayAdInfo {
+
+                    google.protobuf.StringValue short_headline = 1;
+                    google.protobuf.StringValue long_headline = 2;
+                    google.protobuf.StringValue description = 3;
+                    google.protobuf.StringValue business_name = 4;
+                }
+
+                message CallOnlyAdInfo {
+
+                    google.protobuf.StringValue country_code = 1;
+                    google.protobuf.StringValue phone_number = 2;
+                    google.protobuf.StringValue business_name = 3;
+                    google.protobuf.StringValue description1 = 4;
+                    google.protobuf.StringValue description2 = 5;
+                    google.protobuf.BoolValue call_tracked = 6;
+                    google.protobuf.BoolValue disable_call_conversion = 7;
+                    google.protobuf.StringValue phone_number_verification_url = 8;
+                }
+
+                message ExpandedDynamicSearchAdInfo {
+
+                    google.protobuf.StringValue description = 1;
+                }
+
+                message HotelAdInfo {
+                }
+
+                message KeywordInfo {
+
+                    google.protobuf.StringValue text = 1;
+                    enums.KeywordMatchTypeEnum.KeywordMatchType match_type = 2;
+                }
+
+                message LocationInfo {
+                }
+
+                message PlatformInfo {
+                }
+
+                message ListingGroupInfo {
+
+                    enums.ListingGroupTypeEnum.ListingGroupType type = 1;
+                    ListingDimensionInfo case_value = 2;
+                    google.protobuf.Int64Value parent_criterion_id = 3;
+                }
+
+                message ListingDimensionInfo {
+
+                    oneof dimension {
+
+                        ListingBrandInfo listing_brand = 1;
+                        HotelIdInfo hotel_id = 2;
+                        HotelClassInfo hotel_class = 3;
+                        HotelCountryRegionInfo hotel_country_region = 4;
+                        HotelStateInfo hotel_state = 5;
+                        HotelCityInfo hotel_city = 6;
+                        ListingCustomAttributeInfo listing_custom_attribute = 7;
+                    }
+                }
+
+                message ListingBrandInfo {
+
+                    google.protobuf.StringValue value = 1;
+                }
+
+                message HotelIdInfo {
+
+                    google.protobuf.StringValue value = 1;
+                }
+
+                message HotelClassInfo {
+
+                    google.protobuf.Int64Value value = 1;
+                }
+
+                message HotelCountryRegionInfo {
+
+                    google.protobuf.StringValue country_region_criterion = 1;
+                }
+
+                message HotelStateInfo {
+
+                    google.protobuf.StringValue state_criterion = 1;
+                }
+
+                message HotelCityInfo {
+
+                    google.protobuf.StringValue city_criterion = 1;
+                }
+
+                message ListingCustomAttributeInfo {
+
+                    google.protobuf.StringValue value = 1;
+                    enums.ListingCustomAttributeIndexEnum.ListingCustomAttributeIndex index = 2;
+                }
+
+                message HotelDateSelectionTypeInfo {
+                }
+
+                message HotelAdvanceBookingWindowInfo {
+
+                    google.protobuf.Int64Value min_days = 1;
+                    google.protobuf.Int64Value max_days = 2;
+                }
+
+                message HotelLengthOfStayInfo {
+
+                    google.protobuf.Int64Value min_nights = 1;
+                    google.protobuf.Int64Value max_nights = 2;
+                }
+
+                message HotelCheckInDayInfo {
+                }
+
+                message EnhancedCpc {
+                }
+
+                message ManualCpc {
+
+                    google.protobuf.BoolValue enhanced_cpc_enabled = 1;
+                }
+
+                message ManualCpm {
+                }
+
+                message MaximizeConversions {
+                }
+
+                message MaximizeConversionValue {
+
+                    google.protobuf.DoubleValue target_roas = 1;
+                }
+
+                message PageOnePromoted {
+
+                    enums.PageOnePromotedStrategyGoalEnum.PageOnePromotedStrategyGoal strategy_goal = 1;
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 2;
+                    google.protobuf.DoubleValue bid_modifier = 3;
+                    google.protobuf.BoolValue only_raise_cpc_bids = 4;
+                    google.protobuf.BoolValue raise_cpc_bid_when_budget_constrained = 5;
+                    google.protobuf.BoolValue raise_cpc_bid_when_quality_score_is_low = 6;
+                }
+
+                message TargetCpa {
+
+                    google.protobuf.Int64Value target_cpa_micros = 1;
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 2;
+                    google.protobuf.Int64Value cpc_bid_floor_micros = 3;
+                }
+
+                message TargetOutrankShare {
+
+                    google.protobuf.Int32Value target_outrank_share_micros = 1;
+                    google.protobuf.StringValue competitor_domain = 2;
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 3;
+                    google.protobuf.BoolValue only_raise_cpc_bids = 4;
+                    google.protobuf.BoolValue raise_cpc_bid_when_quality_score_is_low = 5;
+                }
+
+                message TargetRoas {
+
+                    google.protobuf.DoubleValue target_roas = 1;
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 2;
+                    google.protobuf.Int64Value cpc_bid_floor_micros = 3;
+                }
+
+                message TargetSpend {
+
+                    google.protobuf.Int64Value target_spend_micros = 1;
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 2;
+                }
+
+                message PercentCpc {
+
+                    google.protobuf.Int64Value cpc_bid_ceiling_micros = 1;
+                    google.protobuf.BoolValue enhanced_cpc_enabled = 2;
+                }
+            }
+
+            message enums {
+
+                option java_package = "com.google.ads.googleads.v0.enums";
+                option java_outer_classname = "TargetCpaOptInRecommendationGoalProto";
+                option java_multiple_files = true;
+                option objc_class_prefix = "GAA";
+                option csharp_namespace = "Google.Ads.GoogleAds.V0.Enums";
+                option php_namespace = "Google\\Ads\\GoogleAds\\V0\\Enums";
+                option php_metadata_namespace = "Google\\Ads\\GoogleAds\\V0\\Enums";
+
+                message AdNetworkTypeEnum {
+
+                    enum AdNetworkType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SEARCH = 2;
+                        SEARCH_PARTNERS = 3;
+                        CONTENT = 4;
+                        YOUTUBE_SEARCH = 5;
+                        YOUTUBE_WATCH = 6;
+                    }
+                }
+
+                message DayOfWeekEnum {
+
+                    enum DayOfWeek {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        MONDAY = 2;
+                        TUESDAY = 3;
+                        WEDNESDAY = 4;
+                        THURSDAY = 5;
+                        FRIDAY = 6;
+                        SATURDAY = 7;
+                        SUNDAY = 8;
+                    }
+                }
+
+                message DeviceEnum {
+
+                    enum Device {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        MOBILE = 2;
+                        TABLET = 3;
+                        DESKTOP = 4;
+                    }
+                }
+
+                message SlotEnum {
+
+                    enum Slot {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SEARCH_SIDE = 2;
+                        SEARCH_TOP = 3;
+                        SEARCH_OTHER = 4;
+                        CONTENT = 5;
+                        SEARCH_PARTNER_TOP = 6;
+                        SEARCH_PARTNER_OTHER = 7;
+                    }
+                }
+
+                message AdGroupStatusEnum {
+
+                    enum AdGroupStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENABLED = 2;
+                        PAUSED = 3;
+                        REMOVED = 4;
+                    }
+                }
+
+                message AdGroupTypeEnum {
+
+                    enum AdGroupType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SEARCH_STANDARD = 2;
+                        HOTEL_ADS = 6;
+                    }
+                }
+
+                message AdTypeEnum {
+
+                    enum AdType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        TEXT_AD = 2;
+                        EXPANDED_TEXT_AD = 3;
+                        DYNAMIC_SEARCH_AD = 4;
+                        RESPONSIVE_DISPLAY_AD = 5;
+                        CALL_ONLY_AD = 6;
+                        EXPANDED_DYNAMIC_SEARCH_AD = 7;
+                        HOTEL_AD = 8;
+                    }
+                }
+
+                message AdGroupAdStatusEnum {
+
+                    enum AdGroupAdStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENABLED = 2;
+                        PAUSED = 3;
+                        REMOVED = 4;
+                    }
+                }
+
+                message KeywordMatchTypeEnum {
+
+                    enum KeywordMatchType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        EXACT = 2;
+                        PHRASE = 3;
+                        BROAD = 4;
+                    }
+                }
+
+                message ListingCustomAttributeIndexEnum {
+
+                    enum ListingCustomAttributeIndex {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        CUSTOM_ATTRIBUTE_0 = 2;
+                        CUSTOM_ATTRIBUTE_1 = 3;
+                        CUSTOM_ATTRIBUTE_2 = 4;
+                        CUSTOM_ATTRIBUTE_3 = 5;
+                        CUSTOM_ATTRIBUTE_4 = 6;
+                    }
+                }
+
+                message ListingGroupTypeEnum {
+
+                    enum ListingGroupType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SUBDIVISION = 2;
+                        UNIT = 3;
+                    }
+                }
+
+                message AdGroupCriterionStatusEnum {
+
+                    enum AdGroupCriterionStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENABLED = 2;
+                        PAUSED = 3;
+                        REMOVED = 4;
+                    }
+                }
+
+                message BiddingSourceEnum {
+
+                    enum BiddingSource {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ADGROUP = 2;
+                        CRITERION = 3;
+                        CAMPAIGN_BIDDING_STRATEGY = 5;
+                    }
+                }
+
+                message CriterionTypeEnum {
+
+                    enum CriterionType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        KEYWORD = 2;
+                        PLATFORM = 6;
+                        LOCATION = 7;
+                        LISTING_GROUP = 8;
+                    }
+                }
+
+                message QualityScoreBucketEnum {
+
+                    enum QualityScoreBucket {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        BELOW_AVERAGE = 2;
+                        AVERAGE = 3;
+                        ABOVE_AVERAGE = 4;
+                    }
+                }
+
+                message PageOnePromotedStrategyGoalEnum {
+
+                    enum PageOnePromotedStrategyGoal {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        FIRST_PAGE = 2;
+                        FIRST_PAGE_PROMOTED = 3;
+                    }
+                }
+
+                message BiddingStrategyTypeEnum {
+
+                    enum BiddingStrategyType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENHANCED_CPC = 2;
+                        MANUAL_CPC = 3;
+                        MANUAL_CPM = 4;
+                        MAXIMIZE_CONVERSIONS = 10;
+                        MAXIMIZE_CONVERSION_VALUE = 11;
+                        PAGE_ONE_PROMOTED = 5;
+                        PERCENT_CPC = 12;
+                        TARGET_CPA = 6;
+                        TARGET_OUTRANK_SHARE = 7;
+                        TARGET_ROAS = 8;
+                        TARGET_SPEND = 9;
+                    }
+                }
+
+                message AdServingOptimizationStatusEnum {
+
+                    enum AdServingOptimizationStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        OPTIMIZE = 2;
+                        CONVERSION_OPTIMIZE = 3;
+                        ROTATE = 4;
+                        ROTATE_INDEFINITELY = 5;
+                        UNAVAILABLE = 6;
+                    }
+                }
+
+                message AdvertisingChannelSubTypeEnum {
+
+                    enum AdvertisingChannelSubType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SEARCH_MOBILE_APP = 2;
+                        SEARCH_EXPRESS = 4;
+                    }
+                }
+
+                message AdvertisingChannelTypeEnum {
+
+                    enum AdvertisingChannelType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SEARCH = 2;
+                        HOTEL = 5;
+                    }
+                }
+
+                message CampaignServingStatusEnum {
+
+                    enum CampaignServingStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SERVING = 2;
+                        NONE = 3;
+                        ENDED = 4;
+                        PENDING = 5;
+                        SUSPENDED = 6;
+                    }
+                }
+
+                message CampaignStatusEnum {
+
+                    enum CampaignStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENABLED = 2;
+                        PAUSED = 3;
+                        REMOVED = 4;
+                    }
+                }
+
+                message BudgetDeliveryMethodEnum {
+
+                    enum BudgetDeliveryMethod {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        STANDARD = 2;
+                        ACCELERATED = 3;
+                    }
+                }
+
+                message BudgetStatusEnum {
+
+                    enum BudgetStatus {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        ENABLED = 2;
+                        REMOVED = 3;
+                    }
+                }
+
+                message RecommendationTypeEnum {
+
+                    enum RecommendationType {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        CAMPAIGN_BUDGET = 2;
+                        KEYWORD = 3;
+                        TEXT_AD = 4;
+                        TARGET_CPA_OPT_IN = 5;
+                    }
+                }
+
+                message TargetCpaOptInRecommendationGoalEnum {
+
+                    enum TargetCpaOptInRecommendationGoal {
+
+                        UNSPECIFIED = 0;
+                        UNKNOWN = 1;
+                        SAME_COST = 2;
+                        SAME_CONVERSIONS = 3;
+                        SAME_CPA = 4;
+                        CLOSEST_CPA = 5;
+                    }
+                }
+            }
+
+            message resources {
+
+                option java_package = "com.google.ads.googleads.v0.resources";
+                option java_outer_classname = "RecommendationProto";
+                option java_multiple_files = true;
+                option objc_class_prefix = "GAA";
+                option csharp_namespace = "Google.Ads.GoogleAds.V0.Resources";
+                option php_namespace = "Google\\Ads\\GoogleAds\\V0\\Resources";
+                option php_metadata_namespace = "Google\\Ads\\GoogleAds\\V0\\Resources";
+
+                message AdGroup {
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue name = 4;
+                    enums.AdGroupStatusEnum.AdGroupStatus status = 5;
+                    enums.AdGroupTypeEnum.AdGroupType type = 12;
+                    google.protobuf.StringValue tracking_url_template = 13;
+                    repeated common.CustomParameter url_custom_parameters = 6;
+                    google.protobuf.StringValue campaign = 10;
+                    google.protobuf.Int64Value cpc_bid_micros = 14;
+                    google.protobuf.Int64Value cpm_bid_micros = 15;
+                    google.protobuf.Int64Value cpa_bid_micros = 16;
+                    google.protobuf.Int64Value cpv_bid_micros = 17;
+                    google.protobuf.DoubleValue target_roas_override = 19;
+                    google.protobuf.Int64Value percent_cpc_bid_micros = 20;
+                }
+
+                message AdGroupAd {
+
+                    string resource_name = 1;
+                    enums.AdGroupAdStatusEnum.AdGroupAdStatus status = 3;
+                    google.protobuf.StringValue ad_group = 4;
+                    common.Ad ad = 5;
+                }
+
+                message AdGroupBidModifier {
+
+                    oneof criterion {
+
+                        common.HotelDateSelectionTypeInfo hotel_date_selection_type = 5;
+                        common.HotelAdvanceBookingWindowInfo hotel_advance_booking_window = 6;
+                        common.HotelLengthOfStayInfo hotel_length_of_stay = 7;
+                        common.HotelCheckInDayInfo hotel_check_in_day = 8;
+                    }
+
+                    string resource_name = 1;
+                    google.protobuf.StringValue ad_group = 2;
+                    google.protobuf.Int64Value criterion_id = 3;
+                    google.protobuf.DoubleValue bid_modifier = 4;
+                }
+
+                message AdGroupCriterion {
+
+                    oneof criterion {
+
+                        common.KeywordInfo keyword = 27;
+                        common.ListingGroupInfo listing_group = 32;
+                    }
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value criterion_id = 26;
+                    enums.AdGroupCriterionStatusEnum.AdGroupCriterionStatus status = 3;
+                    QualityInfo quality_info = 4;
+                    google.protobuf.StringValue ad_group = 5;
+                    enums.CriterionTypeEnum.CriterionType type = 25;
+                    google.protobuf.BoolValue negative = 31;
+                    google.protobuf.Int64Value cpc_bid_micros = 16;
+                    google.protobuf.Int64Value cpm_bid_micros = 17;
+                    google.protobuf.Int64Value cpv_bid_micros = 24;
+                    google.protobuf.Int64Value percent_cpc_bid_micros = 33;
+                    google.protobuf.Int64Value effective_cpc_bid_micros = 18;
+                    google.protobuf.Int64Value effective_cpm_bid_micros = 19;
+                    google.protobuf.Int64Value effective_cpv_bid_micros = 20;
+                    google.protobuf.Int64Value effective_percent_cpc_bid_micros = 34;
+                    enums.BiddingSourceEnum.BiddingSource effective_cpc_bid_source = 21;
+                    enums.BiddingSourceEnum.BiddingSource effective_cpm_bid_source = 22;
+                    enums.BiddingSourceEnum.BiddingSource effective_cpv_bid_source = 23;
+                    enums.BiddingSourceEnum.BiddingSource effective_percent_cpc_bid_source = 35;
+                    PositionEstimates position_estimates = 10;
+                    repeated google.protobuf.StringValue final_urls = 11;
+                    google.protobuf.StringValue tracking_url_template = 13;
+                    repeated common.CustomParameter url_custom_parameters = 14;
+
+                    message QualityInfo {
+
+                        google.protobuf.Int32Value quality_score = 1;
+                        enums.QualityScoreBucketEnum.QualityScoreBucket creative_quality_score = 2;
+                        enums.QualityScoreBucketEnum.QualityScoreBucket post_click_quality_score = 3;
+                        enums.QualityScoreBucketEnum.QualityScoreBucket search_predicted_ctr = 4;
+                    }
+
+                    message PositionEstimates {
+
+                        google.protobuf.Int64Value first_page_cpc_micros = 1;
+                        google.protobuf.Int64Value first_position_cpc_micros = 2;
+                        google.protobuf.Int64Value top_of_page_cpc_micros = 3;
+                    }
+                }
+
+                message BiddingStrategy {
+
+                    oneof scheme {
+
+                        common.EnhancedCpc enhanced_cpc = 7;
+                        common.PageOnePromoted page_one_promoted = 8;
+                        common.TargetCpa target_cpa = 9;
+                        common.TargetOutrankShare target_outrank_share = 10;
+                        common.TargetRoas target_roas = 11;
+                        common.TargetSpend target_spend = 12;
+                    }
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue name = 4;
+                    enums.BiddingStrategyTypeEnum.BiddingStrategyType type = 5;
+                }
+
+                message Campaign {
+
+                    oneof campaign_bidding_strategy {
+
+                        google.protobuf.StringValue bidding_strategy = 23;
+                        common.ManualCpc manual_cpc = 24;
+                        common.ManualCpm manual_cpm = 25;
+                        common.MaximizeConversions maximize_conversions = 30;
+                        common.MaximizeConversionValue maximize_conversion_value = 31;
+                        common.TargetCpa target_cpa = 26;
+                        common.TargetRoas target_roas = 29;
+                        common.TargetSpend target_spend = 27;
+                        common.PercentCpc percent_cpc = 34;
+                    }
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue name = 4;
+                    enums.CampaignStatusEnum.CampaignStatus status = 5;
+                    enums.CampaignServingStatusEnum.CampaignServingStatus serving_status = 21;
+                    enums.AdServingOptimizationStatusEnum.AdServingOptimizationStatus ad_serving_optimization_status = 8;
+                    enums.AdvertisingChannelTypeEnum.AdvertisingChannelType advertising_channel_type = 9;
+                    enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType advertising_channel_sub_type = 10;
+                    google.protobuf.StringValue tracking_url_template = 11;
+                    repeated common.CustomParameter url_custom_parameters = 12;
+                    NetworkSettings network_settings = 14;
+                    HotelSettingInfo hotel_setting = 32;
+                    DynamicSearchAdsSetting dynamic_search_ads_setting = 33;
+                    google.protobuf.StringValue campaign_budget = 6;
+                    enums.BiddingStrategyTypeEnum.BiddingStrategyType bidding_strategy_type = 22;
+                    google.protobuf.StringValue start_date = 19;
+                    google.protobuf.StringValue end_date = 20;
+
+                    message NetworkSettings {
+
+                        google.protobuf.BoolValue target_google_search = 1;
+                        google.protobuf.BoolValue target_search_network = 2;
+                        google.protobuf.BoolValue target_content_network = 3;
+                        google.protobuf.BoolValue target_partner_search_network = 4;
+                    }
+
+                    message HotelSettingInfo {
+
+                        google.protobuf.Int64Value hotel_center_id = 1;
+                    }
+
+                    message DynamicSearchAdsSetting {
+
+                        google.protobuf.StringValue domain_name = 1;
+                        google.protobuf.StringValue language_code = 2;
+                        google.protobuf.BoolValue use_supplied_urls_only = 3;
+                        repeated google.protobuf.Int64Value feed_ids = 4;
+                    }
+                }
+
+                message CampaignBudget {
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue name = 4;
+                    google.protobuf.Int64Value amount_micros = 5;
+                    enums.BudgetStatusEnum.BudgetStatus status = 6;
+                    enums.BudgetDeliveryMethodEnum.BudgetDeliveryMethod delivery_method = 7;
+                    google.protobuf.BoolValue explicitly_shared = 8;
+                    google.protobuf.Int64Value reference_count = 9;
+                }
+
+                message CampaignCriterion {
+
+                    oneof criterion {
+
+                        common.KeywordInfo keyword = 8;
+                        common.LocationInfo location = 12;
+                        common.PlatformInfo platform = 13;
+                    }
+
+                    string resource_name = 1;
+                    google.protobuf.StringValue campaign = 4;
+                    google.protobuf.Int64Value criterion_id = 5;
+                    google.protobuf.FloatValue bid_modifier = 14;
+                    google.protobuf.BoolValue negative = 7;
+                    enums.CriterionTypeEnum.CriterionType type = 6;
+                }
+
+                message Customer {
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue descriptive_name = 4;
+                    google.protobuf.StringValue currency_code = 5;
+                    google.protobuf.StringValue time_zone = 6;
+                    google.protobuf.StringValue tracking_url_template = 7;
+                    google.protobuf.BoolValue auto_tagging_enabled = 8;
+                    google.protobuf.BoolValue has_partners_badge = 9;
+                }
+
+                message GeoTargetConstant {
+
+                    string resource_name = 1;
+                    google.protobuf.Int64Value id = 3;
+                    google.protobuf.StringValue name = 4;
+                    google.protobuf.StringValue country_code = 5;
+                    google.protobuf.StringValue target_type = 6;
+                }
+
+                message KeywordView {
+
+                    string resource_name = 1;
+                }
+
+                message Recommendation {
+
+                    oneof recommendation {
+
+                        CampaignBudgetRecommendation campaign_budget_recommendation = 4;
+                        KeywordRecommendation keyword_recommendation = 8;
+                        TextAdRecommendation text_ad_recommendation = 9;
+                        TargetCpaOptInRecommendation target_cpa_opt_in_recommendation = 10;
+                    }
+
+                    string resource_name = 1;
+                    enums.RecommendationTypeEnum.RecommendationType type = 2;
+                    RecommendationImpact impact = 3;
+                    google.protobuf.StringValue campaign_budget = 5;
+                    google.protobuf.StringValue campaign = 6;
+                    google.protobuf.StringValue ad_group = 7;
+
+                    message RecommendationImpact {
+
+                        RecommendationMetrics base_metrics = 1;
+                        RecommendationMetrics potential_metrics = 2;
+                    }
+
+                    message RecommendationMetrics {
+
+                        google.protobuf.DoubleValue impressions = 1;
+                        google.protobuf.DoubleValue clicks = 2;
+                        google.protobuf.Int64Value cost_micros = 3;
+                        google.protobuf.DoubleValue conversions = 4;
+                        google.protobuf.DoubleValue video_views = 5;
+                    }
+
+                    message CampaignBudgetRecommendation {
+
+                        google.protobuf.Int64Value current_budget_amount_micros = 1;
+                        google.protobuf.Int64Value recommended_budget_amount_micros = 2;
+                        repeated CampaignBudgetRecommendationOption budget_options = 3;
+
+                        message CampaignBudgetRecommendationOption {
+
+                            google.protobuf.Int64Value budget_amount_micros = 1;
+                            RecommendationImpact impact = 2;
+                        }
+                    }
+
+                    message KeywordRecommendation {
+
+                        common.KeywordInfo keyword = 1;
+                        google.protobuf.Int64Value recommended_cpc_bid_micros = 2;
+                    }
+
+                    message TextAdRecommendation {
+
+                        common.Ad ad = 1;
+                        google.protobuf.StringValue creation_date = 2;
+                        google.protobuf.StringValue auto_apply_date = 3;
+                    }
+
+                    message TargetCpaOptInRecommendation {
+
+                        repeated TargetCpaOptInRecommendationOption options = 1;
+                        google.protobuf.Int64Value recommended_target_cpa_micros = 2;
+
+                        message TargetCpaOptInRecommendationOption {
+
+                            enums.TargetCpaOptInRecommendationGoalEnum.TargetCpaOptInRecommendationGoal goal = 1;
+                            google.protobuf.Int64Value target_cpa_micros = 2;
+                            google.protobuf.Int64Value required_campaign_budget_amount_micros = 3;
+                            RecommendationImpact impact = 4;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+message api {
+
+    option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
+    option java_multiple_files = true;
+    option java_outer_classname = "HttpProto";
+    option java_package = "com.google.api";
+    option objc_class_prefix = "GAPI";
+    option cc_enable_arenas = true;
+
+    extend google.protobuf.MethodOptions {
+
+        HttpRule http = 72295728;
+    }
+
+    message Http {
+
+        repeated HttpRule rules = 1;
+        bool fully_decode_reserved_expansion = 2;
+    }
+
+    message HttpRule {
+
+        oneof pattern {
+
+            string get = 2;
+            string put = 3;
+            string post = 4;
+            string delete = 5;
+            string patch = 6;
+            CustomHttpPattern custom = 8;
+        }
+
+        string selector = 1;
+        string body = 7;
+        string response_body = 12;
+        repeated HttpRule additional_bindings = 11;
+    }
+
+    message CustomHttpPattern {
+
+        string kind = 1;
+        string path = 2;
+    }
+}
