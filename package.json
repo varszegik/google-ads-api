@@ -40,7 +40,8 @@
     "google ads",
     "google ads api",
     "google ads nodejs",
-    "google ads javascript"
+    "google ads javascript",
+    "google ads node"
   ],
   "author": "Opteo",
   "license": "MIT",
@@ -49,23 +50,23 @@
   },
   "homepage": "https://github.com/Opteo/google-ads-api#readme",
   "devDependencies": {
-    "@types/jest": "^24.0.9",
+    "@types/jest": "^24.0.11",
     "dotenv": "^7.0.0",
-    "jest": "^24.1.0",
+    "jest": "^24.5.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.snakecase": "^4.1.1",
     "lodash.template": "^4.4.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.14.3",
+    "prettier": "^1.16.4",
     "ts-jest": "^24.0.0",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.1"
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.112",
-    "@types/request": "^2.47.1",
-    "bluebird": "^3.5.2",
-    "bottleneck": "^2.16.1",
+    "@types/lodash": "^4.14.123",
+    "@types/request": "^2.48.1",
+    "bluebird": "^3.5.3",
+    "bottleneck": "^2.17.1",
     "google-ads-node": "^1.7.0",
     "lodash": "^4.17.11",
     "redis": "^2.8.0"
