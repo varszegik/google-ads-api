@@ -1,9 +1,13 @@
 // manual_mode: This file has been manually modified and should not be touched by generate_services.js
+import { UnionToIntersection } from 'utility-types'
 
 import * as grpc from 'google-ads-node'
 import { Customer, CreateCustomerClientResponse } from 'google-ads-node/build/lib/resources'
+import { SummaryRowSetting } from 'google-ads-node/build/lib/enums'
+import { AllArgs } from 'google-ads-node/build/lib/fields'
 import { getFieldMask } from 'google-ads-node/build/lib/utils'
 import { StringValue } from 'google-protobuf/google/protobuf/wrappers_pb'
+// AllFields.
 
 import GrpcClient from '../grpc'
 import Bottleneck from 'bottleneck'
@@ -19,6 +23,8 @@ import {
     CreateCustomerOptions,
     CreateCustomerFlowSettings,
     QueryOptions,
+    DateConstant,
+    Constraint,
 } from '../types'
 import { CustomerInstance } from '../customer'
 
@@ -29,6 +35,7 @@ export type GetResponse = Promise<Customer>
 export type UpdateResponse = Promise<void>
 export type MutateResourcesResponse = Promise<Mutation>
 export type CreateCustomerResponse = Promise<CreateCustomerClientResponse | CustomerInstance>
+type ValueOf<T> = T[keyof T]
 
 export default class CustomerService extends Service {
     constructor(
@@ -42,7 +49,35 @@ export default class CustomerService extends Service {
         super(cid, client, throttler, name)
     }
 
-    public async report<T>(options: ReportOptions): ReportResponse<T> {
+    public async report<
+        E extends keyof AllArgs,
+        C extends ValueOf<Pick<AllArgs, E>>,
+        A extends keyof ValueOf<Pick<C, 'attributes'>>,
+        M extends keyof ValueOf<Pick<C, 'metrics'>>,
+        S extends keyof ValueOf<Pick<C, 'segments'>>,
+        MR extends UnionToIntersection<ValueOf<Pick<ValueOf<Pick<C, 'attributes'>>, A>>>,
+        AR extends UnionToIntersection<ValueOf<Pick<ValueOf<Pick<C, 'metrics'>>, M>>>,
+        SR extends UnionToIntersection<ValueOf<Pick<ValueOf<Pick<C, 'segments'>>, S>>>
+    >(options: {
+        entity: E
+        attributes?: A[]
+        metrics?: M[]
+        segments?: S[]
+        constraints?: Array<string | object | Constraint> | object
+        date_constant?: DateConstant
+        from_date?: string // ISO 8601(YYYY-MM-DD) format
+        to_date?: string // ISO 8601(YYYY-MM-DD) format
+        limit?: number
+        order_by?: string | Array<string>
+        sort_order?: string
+        summary_row?: SummaryRowSetting
+    }): Promise<Array<MR & AR & SR>> {
+        // }): Promise<{
+        //     a: AR
+        //     s: SR
+        //     m: MR
+        // }> {
+        // ts-ignore
         const results = await this.serviceReport(options, this.pre_report_hook, this.post_report_hook)
         return results
     }

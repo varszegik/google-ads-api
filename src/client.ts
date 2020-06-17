@@ -3,10 +3,10 @@ import crypto from 'crypto'
 import { noop } from 'lodash'
 
 import Customer, { CustomerInstance } from './customer'
-import GrpcClient, { GoogleAdsNodeOptions }  from './grpc'
+import GrpcClient, { GoogleAdsNodeOptions } from './grpc'
 import { normaliseCustomerId } from './utils'
 import { ClientOptions, CustomerOptions } from './types'
-import AccessibleCustomersService from "./services/accessible_customers";
+import AccessibleCustomersService from './services/accessible_customers'
 
 interface ListAccessibleCustomersOptions extends GoogleAdsNodeOptions {
     refresh_token: string
@@ -50,7 +50,7 @@ export default class GoogleAdsApi {
         post_report_hook,
         prevent_mutations,
         logging,
-    }: CustomerOptions): CustomerInstance {
+    }: CustomerOptions) {
         if (!customer_account_id || !refresh_token) {
             throw new Error('Must specify {customer_account_id, refresh_token}')
         }

@@ -2,6 +2,19 @@ import { orderBy, maxBy } from 'lodash'
 import { newCustomerWithMetrics, newCustomer } from '../test_utils'
 import { AdGroupStatus, AdType, SummaryRowSetting } from 'google-ads-node/build/lib/enums'
 
+const t = async () => {
+    const customer = newCustomerWithMetrics()
+
+    const data = await customer.report({
+        entity: 'ad_group',
+        attributes: ['ad_group.id', 'ad_group.name', 'campaign.id'],
+        metrics: ['metrics.impressions'],
+        // segments: ['segments.ad_network_type'],
+        order_by: 'ad_group.id',
+        sort_order: 'DESC',
+    })
+}
+
 describe('Reporting', () => {
     const customer = newCustomerWithMetrics()
 
@@ -9,10 +22,19 @@ describe('Reporting', () => {
         const data = await customer.report({
             entity: 'ad_group',
             attributes: ['ad_group.id', 'ad_group.name', 'campaign.id'],
+            metrics: ['metrics.impressions'],
+            // segments: ['segments.ad_network_type'],
             order_by: 'ad_group.id',
             sort_order: 'DESC',
         })
-        expect(data).toBeInstanceOf(Array)
+
+        type dataType = typeof data
+
+        data[0].segments
+            //
+
+            .expect(data)
+            .toBeInstanceOf(Array)
         expect(data[0]).toEqual({
             campaign: {
                 resource_name: expect.any(String),

@@ -108,7 +108,7 @@ export interface CustomerInstance {
     readonly cid: string
 
     /* Global customer methods */
-    report: <T = any[]>(options: ReportOptions) => ReportResponse<T>
+    report: (options: ReportOptions) => unknown
     reportStream: <T = any>(options: ReportStreamOptions) => AsyncGenerator<T>
     query: (qry: string, options?: QueryOptions) => QueryResponse
     list: () => ListResponse
@@ -191,14 +191,20 @@ export interface CustomerInstance {
     adGroupCriterionSimulations: AdGroupCriterionSimulationService
     campaignCriterionSimulations: CampaignCriterionSimulationService
 }
+// async () => {
+//     const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
+//     cusService.report({
+//         entity:'campaign',
 
+//     })
+// }
 export default function Customer(
     cid: string,
     client: GrpcClient,
     throttler: Bottleneck,
     pre_report_hook: PreReportHook,
     post_report_hook: PostReportHook
-): CustomerInstance {
+) {
     const cusService = new CustomerService(cid, client, throttler, 'CustomerService', pre_report_hook, post_report_hook)
 
     return {
@@ -206,8 +212,9 @@ export default function Customer(
         cid,
 
         /* Top level customer methods */
-        report: options => cusService.report(options),
-        reportStream: options => cusService.reportStream(options),
+        // @ts-ignore
+        report: cusService.report,
+        reportStream: cusService.reportStream,
         query: (qry, options) => cusService.query(qry, options),
         list: () => cusService.list(),
         get: id => cusService.get(id),
@@ -352,3 +359,5 @@ export default function Customer(
         ),
     }
 }
+
+export type CustInst = typeof Customer
