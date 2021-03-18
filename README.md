@@ -282,8 +282,8 @@ const totalRows = await customer.reportCount({
   entity: "search_term_view",
   attributes: ["search_term_view.resource_name"],
 });
-```
 
+```
 
 ## Report Results Order
 
