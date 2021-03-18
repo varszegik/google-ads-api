@@ -284,6 +284,7 @@ const totalRows = await customer.reportCount({
 });
 ```
 
+
 ## Report Results Order
 
 There are 2 methods of sorting the results of report. The prefered method is to use the `order` key, which should be an array of objects with a `field` key and an optional `sort_order` key. The order of the items in the array will map to the order of the sorting keys in the GAQL query, and hence the priorities of the sorts.
