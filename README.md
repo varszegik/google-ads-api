@@ -236,7 +236,7 @@ const adGroup = ResourceNames.adGroup(cus.credentials.customerId, "123");
 
 const adGroupAd = new resources.AdGroupAd({
   status: enums.AdGroupAdStatus.PAUSED,
-  ad_group,
+  ad_group: adGroup,
   ad,
 });
 
@@ -282,7 +282,6 @@ const totalRows = await customer.reportCount({
   entity: "search_term_view",
   attributes: ["search_term_view.resource_name"],
 });
-
 ```
 
 ## Report Results Order
